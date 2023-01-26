@@ -30,10 +30,12 @@ public class MovieRepository {
 
 
     public String addMovieDirectorPair(String director, String movie){
-        if(!directorMovieDB.containsKey(director)){
-            directorMovieDB.put(director, new ArrayList<>());
+        if(moviesDB.containsKey(movie) && directorDB.containsKey(director)){
+            if(!directorMovieDB.containsKey(director)){
+                directorMovieDB.put(director, new ArrayList<>());
+            }
+            directorMovieDB.get(director).add(movie);
         }
-        directorMovieDB.get(director).add(movie);
         return "Success";
     }
 
