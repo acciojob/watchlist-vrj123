@@ -29,7 +29,7 @@ public class MovieRepository {
     }
 
 
-    public String addMovieDirectorPair(String director, String movie){
+    public String addMovieDirectorPair(String movie, String director){
         if(moviesDB.containsKey(movie) && directorDB.containsKey(director)){
             if(!directorMovieDB.containsKey(director)){
                 directorMovieDB.put(director, new ArrayList<>());
@@ -79,7 +79,8 @@ public class MovieRepository {
             return "Director is not there";
         }
         if(directorMovieDB.containsKey(name)){
-            List<String> movies=directorMovieDB.get(name);
+            List<String> movies=new ArrayList<>();
+            movies=directorMovieDB.get(name);
             for(String movie:movies){
                 moviesDB.remove(movie);
             }
