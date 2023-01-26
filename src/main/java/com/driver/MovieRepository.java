@@ -35,8 +35,9 @@ public class MovieRepository {
                 directorMovieDB.put(director, new ArrayList<>());
             }
             directorMovieDB.get(director).add(movie);
+            return "Success";
         }
-        return "Success";
+        return "Some error";
     }
 
     public Movie  getMovieByName(String name){
@@ -66,14 +67,16 @@ public class MovieRepository {
     }
 
     public String deleteDirectorByName(String name){
-        if(!directorDB.containsKey(name) && !directorMovieDB.containsKey(name)){
+        if(!directorDB.containsKey(name)){
             return "Director is not there";
         }
-        List<String> movies=directorMovieDB.get(name);
-        for(String movie:movies){
-            moviesDB.remove(movie);
+        if(directorMovieDB.containsKey(name)){
+            List<String> movies=directorMovieDB.get(name);
+            for(String movie:movies){
+                moviesDB.remove(movie);
+            }
+            directorMovieDB.remove(name);
         }
-        directorMovieDB.remove(name);
         directorDB.remove(name);
         return "Success";
     }
