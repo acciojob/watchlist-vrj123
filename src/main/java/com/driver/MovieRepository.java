@@ -19,13 +19,13 @@ public class MovieRepository {
     public String addMovie(Movie movie){
         String name=movie.getName();
         moviesDB.put(name, movie);
-        return "Movie added successfully";
+        return "Success";
     }
 
     public String addDirector(Director director){
         String name=director.getName();
         directorDB.put(name, director);
-        return "Director added successfully";
+        return "Success";
     }
 
 
@@ -34,20 +34,20 @@ public class MovieRepository {
             directorMovieDB.put(director, new ArrayList<>());
         }
         directorMovieDB.get(director).add(movie);
-        return "Pair made successfully";
+        return "Success";
     }
 
     public Movie  getMovieByName(String name){
-        if(!moviesDB.containsKey(name)){
-            return null;
-        }
+//        if(!moviesDB.containsKey(name)){
+//            return null;
+//        }
         return moviesDB.get(name);
     }
 
     public Director getDirectorByName(String name){
-        if(!directorDB.containsKey(name)){
-            return null;
-        }
+//        if(!directorDB.containsKey(name)){
+//            return null;
+//        }
         return directorDB.get(name);
     }
 
@@ -73,7 +73,7 @@ public class MovieRepository {
         }
         directorMovieDB.remove(name);
         directorDB.remove(name);
-        return "Data deleted successfully";
+        return "Success";
     }
 
     public String deleteAllDirectors(){
@@ -84,6 +84,6 @@ public class MovieRepository {
         }
         directorMovieDB.clear();
         directorDB.clear();
-        return "All director data deleted successfully";
+        return "Success";
     }
 }
