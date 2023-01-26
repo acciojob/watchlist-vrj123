@@ -34,28 +34,36 @@ public class MovieRepository {
             if(!directorMovieDB.containsKey(director)){
                 directorMovieDB.put(director, new ArrayList<>());
             }
-            directorMovieDB.get(director).add(movie);
+            List<String> movies=directorMovieDB.get(director);
+            if(movies.contains(movie)){
+                return "Pair is already there";
+            }
+            movies.add(movie);
+            directorMovieDB.put(director, movies);
             return "Success";
         }
         return "Some error";
     }
 
     public Movie  getMovieByName(String name){
-//        if(!moviesDB.containsKey(name)){
-//            return null;
-//        }
+        if(!moviesDB.containsKey(name)){
+            return null;
+        }
         return moviesDB.get(name);
     }
 
     public Director getDirectorByName(String name){
-//        if(!directorDB.containsKey(name)){
-//            return null;
-//        }
+        if(!directorDB.containsKey(name)){
+            return null;
+        }
         return directorDB.get(name);
     }
 
     public List<String>  getMoviesByDirectorName(String name){
-        return directorMovieDB.get(name);
+        if(directorMovieDB.containsKey(name)){
+            return directorMovieDB.get(name);
+        }
+        return null;
     }
 
     public List<String> findAllMovies(){
@@ -82,9 +90,11 @@ public class MovieRepository {
     }
 
     public String deleteAllDirectors(){
-        for(List<String> movies:directorMovieDB.values()){
-            for(String movie:movies){
-                moviesDB.remove(movie);
+        if(directorMovieDB.size()>0){
+            for(List<String> movies:directorMovieDB.values()){
+                for(String movie:movies){
+                    moviesDB.remove(movie);
+                }
             }
         }
         directorMovieDB.clear();

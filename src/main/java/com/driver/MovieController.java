@@ -50,8 +50,8 @@ public class MovieController {
         return new ResponseEntity(director, HttpStatus.FOUND);
     }
 
-    @GetMapping("/movies/get-movies-by-director-name/{director}")
-    public ResponseEntity getMoviesByDirectorName(@PathVariable("director") String name){
+    @GetMapping("/movies/get-movies-by-director-name/{name}")
+    public ResponseEntity getMoviesByDirectorName(@PathVariable("name") String name){
         List<String> movies=movieService.getMoviesByDirectorName(name);
         if(movies==null){
             return new ResponseEntity(movies, HttpStatus.NOT_FOUND);
